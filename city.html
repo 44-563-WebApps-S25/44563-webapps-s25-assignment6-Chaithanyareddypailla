@@ -9,41 +9,44 @@
 
     <h1>City game by Chaithany Reddy Pailla</h1>
 
-<form>
+<!-- Form to input values -->
+<form id="cityGuessForm">
     <label for="secretCity">Where in the world:</label>
-    <input type="password" id="secretCity" value="San Diego"> <br>
-
-    <label for="userGuess">Guess the city:</label>
-    <input type="text" id="userGuess"> <br>
-
+    <input type="password" id="secretCity" value="San Diego" />
+    <br><br>
+    
+    <label for="guessCity">Guess the city:</label>
+    <input type="text" id="guessCity" />
+    <br><br>
+    
     <button type="button" onclick="checkCity()">Check the guess</button>
 </form>
 
-<div id="result"></div>
+<div id="result"></div> <!-- This will display the results -->
 
 <script>
-        // Global variables
-        let oops = 0; // wrong guesses
-        let found = 0; // correct guesses
+    // Global variables
+    let oops = 0; // wrong guesses
+    let found = 0; // correct guesses
 
-        // Function to check the guess
-        function checkCity() {
-            // Get the value of the hidden secret city and the user's guess
-            const secretCity = document.getElementById('secretCity').value;
-            const guessCity = document.getElementById('guessCity').value;
+    // Function to check the guess
+    function checkCity() {
+        // Get the value of the hidden secret city and the user's guess
+        const secretCity = document.getElementById('secretCity').value;
+        const guessCity = document.getElementById('guessCity').value;
 
-            // Compare the values
-            if (secretCity === guessCity) {
-                found++; // Increment found if the guess is correct
-                alert('GotCha');
-            } else {
-                oops++; // Increment oops if the guess is incorrect
-                alert('Awe');
-            }
-
-            // Update the result display
-            document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
+        // Compare the values
+        if (secretCity === guessCity) {
+            found++; // Increment found if the guess is correct
+            alert('GotCha');
+        } else {
+            oops++; // Increment oops if the guess is incorrect
+            alert('Awe');
         }
-    </script>
+
+        // Update the result display
+        document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
+    }
+</script>
 </body>
 </html> 
