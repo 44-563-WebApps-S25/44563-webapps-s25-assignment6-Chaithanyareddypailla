@@ -22,12 +22,10 @@
 <div id="result"></div>
 
 <script>
-    let oops = 0;   // Wrong guesses
-    let found = 0;  // Correct guesses
-</script>
-
-<script>
     function checkCity() {
+
+        let oops = 0;   // Wrong guesses
+        let found = 0;  // Correct guesses
         // Get values from the inputs
         let secretCity = document.getElementById("secretCity").value;
         let userGuess = document.getElementById("userGuess").value;
@@ -35,7 +33,7 @@
         // Check if the guess is correct
         if (secretCity === userGuess) {
             found++;
-            alert("Missouri");
+            alert("GotCha");
         } else {
             oops++;
             alert("Awe");
