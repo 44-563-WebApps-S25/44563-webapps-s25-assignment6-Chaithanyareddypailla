@@ -22,27 +22,28 @@
 <div id="result"></div>
 
 <script>
-    function checkCity() {
+        // Global variables
+        let oops = 0; // wrong guesses
+        let found = 0; // correct guesses
 
-        let oops = 0;   // Wrong guesses
-        let found = 0;  // Correct guesses
-        // Get values from the inputs
-        let secretCity = document.getElementById("secretCity").value;
-        let userGuess = document.getElementById("userGuess").value;
+        // Function to check the guess
+        function checkCity() {
+            // Get the value of the hidden secret city and the user's guess
+            const secretCity = document.getElementById('secretCity').value;
+            const guessCity = document.getElementById('guessCity').value;
 
-        // Check if the guess is correct
-        if (secretCity === userGuess) {
-            found++;
-            alert("GotCha");
-        } else {
-            oops++;
-            alert("Awe");
+            // Compare the values
+            if (secretCity === guessCity) {
+                found++; // Increment found if the guess is correct
+                alert('GotCha');
+            } else {
+                oops++; // Increment oops if the guess is incorrect
+                alert('Awe');
+            }
+
+            // Update the result display
+            document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
         }
-
-        // Update the result display
-        document.getElementById("result").innerHTML = `Correct: ${found}, Wrong: ${oops}`;
-    }
-</script>
-
+    </script>
 </body>
 </html> 
