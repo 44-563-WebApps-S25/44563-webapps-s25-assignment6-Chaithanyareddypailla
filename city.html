@@ -86,16 +86,6 @@
         }
 </script>
 
-<h1>Message Cost by Chaithanya Reddy Pailla</h1>
-<label>Enter cost per letter:</label>
-<input type="number" id="basicprice" value="0.50"><br><br>
-<label>Enter the length needed for the discount:</label>
-<input type="number" id="breakAt" value="9"><br><br>
-<label>Enter the discount percent:</label>
-<input type="number" id="discount" value="10"><br><br>
-<button onclick="amounts()">Show total</button>
-<div id="result"></div>
-
 <script>
         function amounts() {
             let price = parseFloat(document.getElementById("basicprice").value);
@@ -116,5 +106,15 @@
             document.getElementById("result").innerHTML = "Totals are: " + myResults;
         }
 </script>
+<h1>Message Cost by Chaithanya Reddy Pailla</h1>
+<label>Enter cost per letter:</label>
+<input type="number" id="basicprice" value="0.50"><br><br>
+<label>Enter the length needed for the discount:</label>
+<input type="number" id="breakAt" value="9"><br><br>
+<label>Enter the discount percent:</label>
+<input type="number" id="discount" value="10"><br><br>
+<button onclick="amounts()">Show total</button>
+<div id="result"></div>
+
 </body>
 </html> 
