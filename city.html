@@ -120,6 +120,37 @@
             document.getElementById("messageResult").innerHTML = "Totals are: " + myResults;
         }
     </script>
+    <h2>Choose an Operation</h2>
+    <form>
+        <input type="radio" name="operation" value="times" onclick="chooseOp()"> Product<br>
+        <input type="radio" name="operation" value="add" onclick="chooseOp()"> Sum<br>
+        <input type="radio" name="operation" value="mod" onclick="chooseOp()"> Modulo<br>
+    </form>
+    <div id="operationResult"></div>
+    <script>
+        function chooseOp() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let operation = document.querySelector('input[name="operation"]:checked');
+            if (!operation) return;
+            let result;
+            switch (operation.value) {
+                case "times":
+                    result = price * breakAt;
+                    document.getElementById("operationResult").innerHTML = `${price} * ${breakAt} = ${result}`;
+                    break;
+                case "add":
+                    result = price + breakAt;
+                    document.getElementById("operationResult").innerHTML = `${price} + ${breakAt} = ${result}`;
+                    break;
+                case "mod":
+                    result = price % breakAt;
+                    document.getElementById("operationResult").innerHTML = `${price} % ${breakAt} = ${result}`;
+                    break;
+            }
+        }
+    </script>
+  
 
 </body>
 </html>
