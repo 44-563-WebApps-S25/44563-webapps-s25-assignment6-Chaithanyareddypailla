@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Game by Chaithanya Reddy Pailla</title>
     <style>
         #image-container {
@@ -13,60 +14,53 @@
             height: 150px;
             cursor: pointer;
         }
-   </style>
+    </style>
 </head>
- <body>
+<body>
+    <!-- Part 2: Basic HTML Structure -->
+    <h1>City Game by Chaithanya Reddy Pailla</h1>
 
-<h1>City game by Chaithany Reddy Pailla</h1>
+    <!-- Part 3: Input Form and Response Code -->
+    <form id="cityGuessForm">
+        <label for="secretCity">Where in the world:</label>
+        <input type="password" id="secretCity" value="San Diego" />
+        <br><br>
+        
+        <label for="guessCity">Guess the city:</label>
+        <input type="text" id="guessCity" />
+        <br><br>
+        
+        <button type="button" onclick="checkCity()">Check the guess</button>
+    </form>
+    <div id="result"></div> 
 
-<!-- Form to input values -->
-<form id="cityGuessForm">
-    <label for="secretCity">Where in the world:</label>
-    <input type="password" id="secretCity" value="San Diego" />
-    <br><br>
-    
-    <label for="guessCity">Guess the city:</label>
-    <input type="text" id="guessCity" />
-    <br><br>
-    
-    <button type="button" onclick="checkCity()">Check the guess</button>
-</form>
+    <script>
+        let oops = 0;
+        let found = 0;
 
-<div id="result"></div> <!-- This will display the results -->
+        function checkCity() {
+            const secretCity = document.getElementById('secretCity').value;
+            const guessCity = document.getElementById('guessCity').value;
 
-<script>
-    // Global variables
-    let oops = 0; // wrong guesses
-    let found = 0; // correct guesses
-
-    // Function to check the guess
-    function checkCity() {
-        // Get the value of the hidden secret city and the user's guess
-        const secretCity = document.getElementById('secretCity').value;
-        const guessCity = document.getElementById('guessCity').value;
-
-        // Compare the values
-        if (secretCity === guessCity) {
-            found++; // Increment found if the guess is correct
-            alert('GotCha');
-        } else {
-            oops++; // Increment oops if the guess is incorrect
-            alert('Awe');
+            if (secretCity === guessCity) {
+                found++;
+                alert('GotCha');
+            } else {
+                oops++;
+                alert('Awe');
+            }
+            document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
         }
+    </script>
 
-        // Update the result display
-        document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
-    }
-</script>
+    <!-- Part 4: Image Change -->
+    <h2>Click the image to change it</h2>
+    <div id="image-container">
+        <img id="petImage" src="pet1.jpg" onclick="updatePic()" alt="Pet Image">
+    </div>
 
-<h2>Click the image to change it</h2>
-
-<div id="image-container">
-    <img id="petImage" src="pet1.jpg" onclick="updatePic()" alt="Pet Image">
-</div>
-
-<script>
-    let usePic = 1;
+    <script>
+        let usePic = 1;
         function updatePic() {
             let img = document.getElementById("petImage");
             switch (usePic) {
@@ -84,9 +78,20 @@
                     break;
             }
         }
-</script>
+    </script>
 
-<script>
+    <!-- Part 5: Message Cost Computation -->
+    <h1>Message Cost by Chaithanya Reddy Pailla</h1>
+    <label>Enter cost per letter:</label>
+    <input type="number" id="basicprice" value="0.50"><br><br>
+    <label>Enter the length needed for the discount:</label>
+    <input type="number" id="breakAt" value="9"><br><br>
+    <label>Enter the discount percent:</label>
+    <input type="number" id="discount" value="10"><br><br>
+    <button onclick="amounts()">Show total</button>
+    <div id="costResult"></div>
+
+    <script>
         function amounts() {
             let price = parseFloat(document.getElementById("basicprice").value);
             let breakAt = parseInt(document.getElementById("breakAt").value);
@@ -102,19 +107,8 @@
                 }
                 myResults += `Size ${size} costs ${totalCost.toFixed(2)}; `;
             }
-
-            document.getElementById("result").innerHTML = "Totals are: " + myResults;
+            document.getElementById("costResult").innerHTML = "Totals are: " + myResults;
         }
-</script>
-<h1>Message Cost by Chaithanya Reddy Pailla</h1>
-<label>Enter cost per letter:</label>
-<input type="number" id="basicprice" value="0.50"><br><br>
-<label>Enter the length needed for the discount:</label>
-<input type="number" id="breakAt" value="9"><br><br>
-<label>Enter the discount percent:</label>
-<input type="number" id="discount" value="10"><br><br>
-<button onclick="amounts()">Show total</button>
-<div id="result"></div>
-
+    </script>
 </body>
-</html> 
+</html>
