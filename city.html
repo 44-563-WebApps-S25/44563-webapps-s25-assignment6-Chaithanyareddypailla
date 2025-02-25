@@ -150,6 +150,48 @@
             }
         }
     </script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chaithanya Plans Dinner</title>
+    </head>
+    <body>
+        <h1>Chaithanya Plans Dinner</h1>
+        
+        <form>
+            <label><input type="checkbox" id="wine" value="True"> Serve wine</label><br>
+            <label><input type="checkbox" id="outside" value="True"> Eat outside</label><br>
+            <label><input type="checkbox" id="candel" value="False"> Light candles</label><br>
+            <button type="button" onclick="choices()">Dinner Choices</button>
+        </form>
+        <p id="dinnerResults"></p>
+        
+        <form>
+            <label>Enter main dish: <input type="text" id="mainDish" value="Butter Chicken"></label><br>
+            <label>Enter dessert: <input type="text" id="dessert"></label><br>
+            <button type="button" onclick="updateDinner()">Update the dinner</button>
+        </form>
+        <p id="updatedDinner"></p>
+    
+        <script>
+            let my_dinner = {};
+    
+            function choices() {
+                my_dinner = {};
+                my_dinner.wine = document.getElementById("wine").checked;
+                my_dinner.outside = document.getElementById("outside").checked;
+                my_dinner.candel = document.getElementById("candel").checked;
+                document.getElementById("dinnerResults").innerHTML = JSON.stringify(my_dinner);
+            }
+    
+            function updateDinner() {
+                my_dinner.main = document.getElementById("mainDish").value;
+                my_dinner.dessert = document.getElementById("dessert").value;
+                document.getElementById("updatedDinner").innerHTML = JSON.stringify(my_dinner);
+            }
+        </script>
   
 
 </body>
