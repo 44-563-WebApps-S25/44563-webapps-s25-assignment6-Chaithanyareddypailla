@@ -6,4 +6,4 @@ Hosted at [Guess& Pet](https://44-563-webapps-s25.github.io/44563-webapps-s25-as
 <br>
 Hosted at [Calucation](https://44-563-webapps-s25.github.io/44563-webapps-s25-assignment6-Chaithanyareddypailla/message.html)
 <br>
-Hosted at [Dinner plan](https://44-563-webapps-s25.github.io/44563-webapps-s25-assignment6-Chaithanyareddypailla dinner.html)
+Hosted at [Dinner plan](https://44-563-webapps-s25.github.io/44563-webapps-s25-assignment6-Chaithanyareddypailla/dinner.html)
