@@ -113,11 +113,13 @@
                 totalCost = size * price * ((100 - discount) / 100); // Discounted price
             }
 
-            myResults += `size ${size} is ${totalCost.toFixed(1)}; `;
+            // Ensure only one decimal place
+            myResults += `size ${size} is ${parseFloat(totalCost.toFixed(1))}; `;
         }
 
         document.getElementById("costResult").innerHTML = myResults;
     }
 </script>
+
 </body>
 </html>
