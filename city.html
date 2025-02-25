@@ -120,37 +120,64 @@
             document.getElementById("messageResult").innerHTML = "Totals are: " + myResults;
         }
     </script>
-    <h2>Choose an Operation</h2>
+    <h1>Chaithanya Message Cost</h1>
+    <label>Enter cost per letter: <input type="number" id="basicprice" value="0.50"></label><br>
+    <label>Enter the length needed for the discount: <input type="number" id="breakAt" value="9"></label><br>
+    <label>Enter the discount percent: <input type="number" id="discount" value="10"></label><br>
+    <button onclick="amounts()">Show total</button>
+    <p id="results"></p>
+
+    <h2>Select Operation</h2>
     <form>
-        <input type="radio" name="operation" value="times" onclick="chooseOp()"> Product<br>
-        <input type="radio" name="operation" value="add" onclick="chooseOp()"> Sum<br>
-        <input type="radio" name="operation" value="mod" onclick="chooseOp()"> Modulo<br>
+        <label><input type="radio" name="operation" value="times" onclick="chooseOp()"> Product</label><br>
+        <label><input type="radio" name="operation" value="add" onclick="chooseOp()"> Sum</label><br>
+        <label><input type="radio" name="operation" value="mod" onclick="chooseOp()"> Mod</label><br>
     </form>
-    <div id="operationResult"></div>
+    <p id="operationResult"></p>
+
     <script>
+        function amounts() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let discount = parseFloat(document.getElementById("discount").value) / 100;
+            let myResults = "";
+            
+            for (let size = breakAt - 3; size <= breakAt + 3; size++) {
+                let totalCost = 0;
+                
+                for (let i = 1; i <= size; i++) {
+                    if (i < breakAt) {
+                        totalCost += price;
+                    } else {
+                        totalCost += price * (1 - discount);
+                    }
+                }
+                myResults += `size ${size} costs ${totalCost.toFixed(2)}; `;
+            }
+            
+            document.getElementById("results").innerHTML = "Totals are: " + myResults;
+        }
+        
         function chooseOp() {
             let price = parseFloat(document.getElementById("basicprice").value);
             let breakAt = parseInt(document.getElementById("breakAt").value);
-            let operation = document.querySelector('input[name="operation"]:checked');
-            if (!operation) return;
-            let result;
-            switch (operation.value) {
-                case "times":
-                    result = price * breakAt;
-                    document.getElementById("operationResult").innerHTML = `${price} * ${breakAt} = ${result}`;
-                    break;
-                case "add":
-                    result = price + breakAt;
-                    document.getElementById("operationResult").innerHTML = `${price} + ${breakAt} = ${result}`;
-                    break;
-                case "mod":
-                    result = price % breakAt;
-                    document.getElementById("operationResult").innerHTML = `${price} % ${breakAt} = ${result}`;
-                    break;
+            let radios = document.getElementsByName("operation");
+            let resultText = "";
+            
+            for (let radio of radios) {
+                if (radio.checked) {
+                    if (radio.value === "times") {
+                        resultText = `${price} * ${breakAt} = ${price * breakAt}`;
+                    } else if (radio.value === "add") {
+                        resultText = `${price} + ${breakAt} = ${price + breakAt}`;
+                    } else if (radio.value === "mod") {
+                        resultText = `${breakAt} % ${price} = ${breakAt % price}`;
+                    }
+                }
             }
+            
+            document.getElementById("operationResult").innerHTML = resultText;
         }
     </script>
-  
-
 </body>
 </html>
