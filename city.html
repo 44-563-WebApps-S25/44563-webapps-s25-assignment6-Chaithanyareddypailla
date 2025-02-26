@@ -3,6 +3,16 @@
 <head>
    <title>City Game by Chaithanya Reddy Pailla</title>
     <style>
+
+       .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
         #image-container {
             text-align: center;
             margin-top: 20px;
@@ -15,9 +25,18 @@
     </style>
 </head>
 <body>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
 
     <!-- Part 2: Basic HTML Structure -->
     <h1>City Game by Chaithanya Reddy Pailla</h1>
+
+    <h1>City Guessing Game</h1>
+    
+    <button onclick="randomCity()">🎲 Generate Random City</button>
 
     <!-- Part 3: Input Form and Response Code -->
     <form id="cityGuessForm">
@@ -31,27 +50,54 @@
         
         <button type="button" onclick="checkCity()">Check the guess</button>
     </form>
+    
+    <button onclick="startTimer()">⏳ Start Timer</button>
+    <div id="timer">Time Left: 10s</div>
 
-    <div id="result"></div> 
+    <div id="results">✅ Correct: 0, ❌ Wrong: 0</div>
 
     <script>
         let oops = 0;
         let found = 0;
+        let timeLeft = 10;
+        let timer;
+
+        function randomCity() {
+            let cities = ["San Diego", "New York", "Los Angeles", "Chicago", "Houston"];
+            let randomIndex = Math.floor(Math.random() * cities.length);
+            document.getElementById("secretCity").value = cities[randomIndex];
+        }
 
         function checkCity() {
-            const secretCity = document.getElementById('secretCity').value;
-            const guessCity = document.getElementById('guessCity').value;
+            let secretCity = document.getElementById("secretCity").value;
+            let guessedCity = document.getElementById("guessedCity").value;
 
-            if (secretCity === guessCity) {
+            if (secretCity.toLowerCase() === guessedCity.toLowerCase()) {
                 found++;
-                alert('GotCha');
+                alert("GotCha! 🎉");
             } else {
                 oops++;
-                alert('Awe');
+                alert("Awe! ❌");
             }
-            document.getElementById('result').innerHTML = `Oops: ${oops}, Found: ${found}`;
+
+            document.getElementById("results").innerHTML = `✅ Correct: ${found}, ❌ Wrong: ${oops}`;
         }
-   </script>
+
+        function startTimer() {
+            timeLeft = 10;
+            document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
+
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    alert("⏳ Time's up! Try again.");
+                }
+            }, 1000);
+        }
+    </script>
 
     <!-- Part 4: Image Change -->
     <h2>Click the image to change it</h2>
