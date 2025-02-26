@@ -2,103 +2,182 @@
 <html lang="en">
 <head>
    <title>City Game by Chaithanya Reddy Pailla</title>
-    <style>
+   <style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+        transition: background 0.5s, color 0.5s;
+    }
 
-       .dark-mode {
-            background-color: black;
-            color: white;
-        }
-        button {
-            padding: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        #image-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        img {
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
-        }
-    </style>
+    /* Dark Mode */
+    .dark-mode {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    .dark-mode button {
+        background-color: #444;
+        color: white;
+    }
+
+    /* Button Styling */
+    button {
+        padding: 12px 20px;
+        margin: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    /* Input Fields */
+    input {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    /* Timer Styling */
+    #timer {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        background-color: #ffcc00;
+        color: black;
+    }
+
+    /* Scoreboard */
+    #results {
+        font-size: 20px;
+        margin-top: 20px;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+    }
+
+    .wrong {
+        background-color: #dc3545 !important;
+    }
+
+</style>
 </head>
 <body>
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-        }
-    </script>
 
-    <!-- Part 2: Basic HTML Structure -->
     <h1>City Game by Chaithanya Reddy Pailla</h1>
 
-    <h1>City Guessing Game</h1>
-    
-    <button onclick="randomCity()">🎲 Generate Random City</button>
+     <!-- Dark Mode Toggle -->
+     <button onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
 
-    <!-- Part 3: Input Form and Response Code -->
-    <form id="cityGuessForm">
-        <label for="secretCity">Where in the world:</label>
-        <input type="password" id="secretCity" value="San Diego" />
-        <br><br>
-        
-        <label for="guessCity">Guess the city:</label>
-        <input type="text" id="guessCity" />
-        <br><br>
-        
-        <button type="button" onclick="checkCity()">Check the guess</button>
-    </form>
-    
-    <button onclick="startTimer()">⏳ Start Timer</button>
-    <div id="timer">Time Left: 10s</div>
-
-    <div id="results">✅ Correct: 0, ❌ Wrong: 0</div>
-
-    <script>
-        let oops = 0;
-        let found = 0;
-        let timeLeft = 10;
-        let timer;
-
-        function randomCity() {
-            let cities = ["San Diego", "New York", "Los Angeles", "Chicago", "Houston"];
-            let randomIndex = Math.floor(Math.random() * cities.length);
-            document.getElementById("secretCity").value = cities[randomIndex];
-        }
-
-        function checkCity() {
-            let secretCity = document.getElementById("secretCity").value;
-            let guessedCity = document.getElementById("guessedCity").value;
-
-            if (secretCity.toLowerCase() === guessedCity.toLowerCase()) {
-                found++;
-                alert("GotCha! 🎉");
-            } else {
-                oops++;
-                alert("Awe! ❌");
-            }
-
-            document.getElementById("results").innerHTML = `✅ Correct: ${found}, ❌ Wrong: ${oops}`;
-        }
-
-        function startTimer() {
-            timeLeft = 10;
-            document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
-
-            clearInterval(timer);
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    alert("⏳ Time's up! Try again.");
-                }
-            }, 1000);
-        }
-    </script>
-
+     <h1>City Guessing Game</h1>
+     
+     <!-- Random City Generator -->
+     <button onclick="randomCity()">🎲 Generate Random City</button>
+ 
+     <!-- City Guessing Form -->
+     <form id="cityGuessForm">
+         <label for="secretCity">Where in the world:</label>
+         <input type="password" id="secretCity" value="San Diego" readonly />
+         <br><br>
+         
+         <label for="guessCity">Guess the city:</label>
+         <input type="text" id="guessCity" />
+         <br><br>
+         
+         <button type="button" onclick="checkCity()">Check the Guess</button>
+     </form>
+     
+     <!-- Timer Start -->
+     <button onclick="startTimer()">⏳ Start Timer</button>
+     <div id="timer">Time Left: 10s</div>
+ 
+     <!-- Scoreboard -->
+     <div id="results">✅ Correct: 0, ❌ Wrong: 0</div>
+ 
+     <script>
+         let oops = 0;
+         let found = 0;
+         let timeLeft = 10;
+         let timer;
+ 
+         // Dark Mode Toggle
+         function toggleTheme() {
+             document.body.classList.toggle("dark-mode");
+         }
+ 
+         // Generate Random City
+         function randomCity() {
+             let cities = ["San Diego", "New York", "Los Angeles", "Chicago", "Houston"];
+             let randomIndex = Math.floor(Math.random() * cities.length);
+             document.getElementById("secretCity").value = cities[randomIndex];
+         }
+ 
+         // Check the User's Guess
+         function checkCity() {
+             let secretCity = document.getElementById("secretCity").value.trim().toLowerCase();
+             let guessedCity = document.getElementById("guessCity").value.trim().toLowerCase();
+ 
+             if (guessedCity === "") {
+                 alert("Please enter a city name!");
+                 return;
+             }
+ 
+             if (secretCity === guessedCity) {
+                 found++;
+                 alert("GotCha! 🎉 You guessed it right!");
+             } else {
+                 oops++;
+                 alert("Awe! ❌ Try again.");
+             }
+ 
+             document.getElementById("results").innerHTML = `✅ Correct: ${found}, ❌ Wrong: ${oops}`;
+             document.getElementById("guessCity").value = ""; // Clear input after guess
+         }
+ 
+         // Timer Function
+         function startTimer() {
+             timeLeft = 10;
+             document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
+             document.getElementById("timer").style.backgroundColor = "#ffcc00"; // Reset timer color
+ 
+             clearInterval(timer);
+             timer = setInterval(() => {
+                 timeLeft--;
+                 document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
+ 
+                 // Change timer color based on time left
+                 if (timeLeft <= 5) {
+                     document.getElementById("timer").style.backgroundColor = "#dc3545"; // Red
+                 } 
+ 
+                 if (timeLeft < 0) {
+                     clearInterval(timer);
+                     alert("⏳ Time's up! Try again.");
+                     document.getElementById("timer").innerHTML = "Time Left: 0s";
+                 }
+             }, 1000);
+         }
+     </script>
     <!-- Part 4: Image Change -->
     <h2>Click the image to change it</h2>
     <div id="image-container">
