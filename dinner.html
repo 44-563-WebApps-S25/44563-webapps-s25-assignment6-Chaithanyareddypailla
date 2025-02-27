@@ -2,6 +2,23 @@
 <html lang="en">
 <head>
      <title>Chaithanya Reddy Pailla Plans Dinner</title>
+     <style>
+        
+        button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0; 
+}
+
+button:hover {
+    background-color: #218838;
+}
+    </style>
 </head>
 <body>
     <h1>Chaithanya Reddy Pailla Plans Dinner</h1>
@@ -13,7 +30,7 @@
     </form>
     
     
-    <button type="button" id="dinnerBtn" class="btn btn-primary" onclick="choices()">Dinner Choices</button>
+    <button onclick="choices()">Dinner Choices</button>
     <p id="dinner_results"></p>
     
     <form>
@@ -24,8 +41,9 @@
         <input type="text" id="dessert"><br>
     </form>
     
-    <button type="button" id="updateDinnerBtn" class="btn btn-primary" onclick="updateDinner()">Update the Dinner</button>
+    <button onclick="updateDinner()">Update the Dinner</button>
     <p id="updated_dinner"></p>
+    
     <script>
         let my_dinner = {};
 
