@@ -5,11 +5,11 @@
    
    <style>
 
-      #petImage {
+    #petImage {
         width: 150px;
         height: 150px;
         object-fit: cover; /* Ensures the image maintains aspect ratio */
-      }
+    }
     body {
         background-color: #f8f9fa;
     }
@@ -22,12 +22,14 @@
         background-color: #dc3545;
     }
     .border {
-        border: 2px solid #dee2e6 !important;
-    }
+    border-width: 2px 1px; /* 2px top & bottom, 1px left & right */
+    border-style: solid;
+    border-color: #dee2e6 !important;
+}
 </style>
 </head>
 <body class="container text-center mt-5">
-<h1 class="mb-4">City Game by [Your Name]</h1>
+<h1 class="mb-4">City Game by Chaithanya Reddy Pailla</h1>
 <form>
     <div class="mb-3">
         <label for="secretCity" class="form-label">Where in the world:</label>
