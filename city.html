@@ -3,163 +3,74 @@
 <head>
    <title>City Game by Chaithanya Reddy Pailla</title>
    
-    <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-            transition: background 0.5s, color 0.5s;
-        }
-
-        /* Dark Mode */
-        .dark-mode {
-            background-color: #1e1e1e;
-            color: #fff;
-        }
-
-        /* Timer & Scoreboard Styling */
-        #timer, #results {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-
-        #timer {
-            background-color: #ffcc00;
-            color: black;
-        }
-
-        #results {
-            background-color: #28a745;
-            color: white;
-        }
-
-        /* Wrong Guess Highlight */
-        .wrong {
-            background-color: #dc3545 !important;
-        }
-
-    </style>
+   <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 500px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+    }
+    .border {
+        border: 2px solid #dee2e6 !important;
+    }
+</style>
 </head>
-<body>
-
-    <div class="container">
-        <h1 class="mt-3">City Game by Chaithanya Reddy Pailla</h1>
-
-        <!-- Dark Mode Toggle -->
-        <button class="btn btn-dark mt-2" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
-
-        <h2 class="mt-4">City Guessing Game</h2>
-
-        <!-- Random City Generator -->
-        <button class="btn btn-primary mt-2" onclick="randomCity()">🎲 Generate Random City</button>
-
-        <!-- Scoreboard Display -->
-        <div id="results" class="mt-3">✅ Correct: 0, ❌ Wrong: 0</div>
-
-        <!-- City Guessing Form -->
-        <form id="cityGuessForm" class="mt-3">
-            <label class="form-label" for="secretCity">Where in the world:</label>
-            <input class="form-control text-center" type="password" id="secretCity" value="San Diego" readonly />
-            <br>
-            
-            <label class="form-label" for="guessCity">Guess the city:</label>
-            <input class="form-control text-center" type="text" id="guessCity" />
-            <br>
-            
-            <button type="button" class="btn btn-success" id="guessBtn" onclick="checkCity()">Check the Guess</button>
-        </form>
-
-        <!-- Timer -->
-        <button class="btn btn-warning mt-3" onclick="startTimer()">⏳ Start Timer</button>
-        <div id="timer">Time Left: 10s</div>
+<body class="container text-center mt-5">
+<h1 class="mb-4">City Game by [Your Name]</h1>
+<form>
+    <div class="mb-3">
+        <label for="secretCity" class="form-label">Where in the world:</label>
+        <input type="password" id="secretCity" value="San Diego" class="form-control">
     </div>
+    <div class="mb-3">
+        <label for="guessCity" class="form-label">Guess the city:</label>
+        <input type="text" id="guessCity" class="form-control">
+    </div>
+    <button type="button" id="guessBtn" class="btn btn-primary" onclick="checkCity()">Check the Guess</button>
+</form>
+<div class="mt-3 p-3 border rounded bg-light">
+    <p class="text-success">Correct Guesses: <span id="found">0</span></p>
+    <p class="text-danger">Wrong Guesses: <span id="oops">0</span></p>
+</div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        let oops = 0;
-        let found = 0;
-        let timeLeft = 10;
-        let timer;
+<script>
+    let found = 0;
+    let oops = 0;
 
-        // Dark Mode Toggle
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
+    function checkCity() {
+        let secretCity = document.getElementById('secretCity').value;
+        let guessCity = document.getElementById('guessCity').value;
+
+        if (guessCity.toLowerCase() === secretCity.toLowerCase()) {
+            found++;
+            alert("GotCha!");
+        } else {
+            oops++;
+            alert("Awe");
         }
 
-        // Generate Random City
-        function randomCity() {
-            let cities = ["San Diego", "New York", "Los Angeles", "Chicago", "Houston"];
-            let randomIndex = Math.floor(Math.random() * cities.length);
-            document.getElementById("secretCity").value = cities[randomIndex];
+        document.getElementById('found').textContent = found;
+        document.getElementById('oops').textContent = oops;
+
+        if (oops > found * 2) {
+            document.getElementById('guessBtn').onclick = function() {
+                alert("Sorry, too many wrong guesses.");
+            };
+            document.getElementById('guessBtn').classList.add("btn-danger");
         }
-
-        // Check the User's Guess
-        function checkCity() {
-            let secretCity = document.getElementById("secretCity").value.trim().toLowerCase();
-            let guessedCity = document.getElementById("guessCity").value.trim().toLowerCase();
-            let guessBtn = document.getElementById("guessBtn");
-
-            if (guessedCity === "") {
-                alert("Please enter a city name!");
-                return;
-            }
-
-            if (secretCity === guessedCity) {
-                found++;
-                alert("🎉 GotCha! You guessed it right!");
-            } else {
-                oops++;
-                alert("❌ Awe! Try again.");
-            }
-
-            // Update Scoreboard
-            document.getElementById("results").innerHTML = `✅ Correct: ${found}, ❌ Wrong: ${oops}`;
-
-            // Clear Input
-            document.getElementById("guessCity").value = "";
-
-            // Check if wrong guesses are more than twice correct guesses
-            if (oops > found * 2) {
-                guessBtn.setAttribute("onclick", "tooManyWrongGuesses()");
-            }
-        }
-
-        // Alert for Too Many Wrong Guesses
-        function tooManyWrongGuesses() {
-            alert("⚠ Sorry, too many wrong guesses.");
-        }
-
-        // Timer Function
-        function startTimer() {
-            timeLeft = 10;
-            document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
-            document.getElementById("timer").style.backgroundColor = "#ffcc00"; // Reset timer color
-
-            clearInterval(timer);
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById("timer").innerHTML = `Time Left: ${timeLeft}s`;
-
-                // Change timer color based on time left
-                if (timeLeft <= 5) {
-                    document.getElementById("timer").style.backgroundColor = "#dc3545"; // Red
-                } 
-
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    alert("⏳ Time's up! Try again.");
-                    document.getElementById("timer").innerHTML = "Time Left: 0s";
-                }
-            }, 1000);
-        }
-    </script>
+    }
+</script>
 
     <!-- Bootstrap JS -->
     
