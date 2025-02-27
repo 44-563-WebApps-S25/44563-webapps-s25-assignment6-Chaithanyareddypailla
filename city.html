@@ -5,25 +5,70 @@
    
    <style>
 
-    #petImage {
-        width: 150px;
-        height: 150px;
-        object-fit: cover; /* Ensures the image maintains aspect ratio */
-    }
-    body {
-        background-color: #f8f9fa;
-    }
-    
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-    }
-    .btn-danger {
-        background-color: #dc3545;
-    }
-    .border {
-        border: 2px solid #dee2e6 !important;
-    }
+  /* Style the image */
+#petImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Ensures the image maintains aspect ratio */
+    border-radius: 10px; /* Adds rounded corners */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease-in-out;
+}
+
+#petImage:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Background styling */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style buttons */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Border styling */
+.border {
+    border-width: 2px 1px; /* Thinner left & right borders */
+    border-style: solid;
+    border-color: #dee2e6 !important;
+    border-radius: 8px; /* Soft rounded edges */
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 300px;
+    background-color: #ffffff; /* Subtle contrast */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05); /* Light shadow */
+}
+
 </style>
 </head>
 <body class="container text-center mt-5">
